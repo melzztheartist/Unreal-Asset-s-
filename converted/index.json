@@ -1,0 +1,58 @@
+{
+ "units": "centimetres, Unreal axes (X forward, Y right, Z up, left-handed), quaternions x,y,z,w, bone transforms are LOCAL (relative to the parent bone)",
+ "bone_parents_assumed_ue5_mannequin": {
+  "root": null,
+  "pelvis": "root",
+  "spine_01": "pelvis",
+  "spine_02": "spine_01",
+  "spine_03": "spine_02",
+  "spine_04": "spine_03",
+  "spine_05": "spine_04",
+  "neck_01": "spine_05",
+  "neck_02": "neck_01",
+  "head": "neck_02",
+  "clavicle_l": "spine_05",
+  "upperarm_l": "clavicle_l",
+  "lowerarm_l": "upperarm_l",
+  "hand_l": "lowerarm_l",
+  "clavicle_r": "spine_05",
+  "upperarm_r": "clavicle_r",
+  "lowerarm_r": "upperarm_r",
+  "hand_r": "lowerarm_r",
+  "thigh_l": "pelvis",
+  "calf_l": "thigh_l",
+  "foot_l": "calf_l",
+  "ball_l": "foot_l",
+  "thigh_r": "pelvis",
+  "calf_r": "thigh_r",
+  "foot_r": "calf_r",
+  "ball_r": "foot_r",
+  "ik_foot_root": "root",
+  "ik_foot_l": "ik_foot_root",
+  "ik_foot_r": "ik_foot_root",
+  "ik_hand_root": "root",
+  "ik_hand_gun": "ik_hand_root",
+  "ik_hand_l": "ik_hand_gun",
+  "ik_hand_r": "ik_hand_gun",
+  "interaction": "root",
+  "center_of_mass": "root"
+ },
+ "animations": [
+  {
+   "name": "MM_Pistol_Equip",
+   "file": "Assets/Action/MM_Pistol_Equip.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  }
+ ],
+ "skipped": [
+  {
+   "file": "Assets/Action/MM_Pistol_Equip_Montage.uasset",
+   "reason": "not a plain animation (AnimMontage), it has no bone tracks of its own"
+  }
+ ],
+ "errors": []
+}
