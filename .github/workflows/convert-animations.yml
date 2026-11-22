@@ -18,13 +18,17 @@ on:
         options: [core, all]
         default: core
       engine_versions:
-        description: "Unreal versions to try, newest first (the first one that reads the file is used)"
+        description: "Unreal versions to try in this order (the first one that reads the file is used; the animations are UE 5.4)"
         type: string
-        default: "VER_UE5_7,VER_UE5_6,VER_UE5_5,VER_UE5_4,VER_UE5_3,VER_UE5_2,VER_UE5_1,VER_UE5_0"
+        default: "VER_UE5_4,VER_UE5_5,VER_UE5_3,VER_UE5_6,VER_UE5_2,VER_UE5_1,VER_UE5_0,VER_UE5_7"
       lfs_repo:
         description: "Optional: the GitHub repository (owner/name) the Assets.zip was downloaded from, so its real files can be fetched from Git LFS"
         type: string
         default: ""
+      limit:
+        description: "Test run: only convert the first N files (0 = all). Try 3 first."
+        type: string
+        default: "0"
       commit_results:
         description: "Also commit the converted files to a converted/ folder in the repository"
         type: boolean
@@ -260,16 +264,20 @@ jobs:
 
           main()
           PYEOF
-          python3 "$RUNNER_TEMP/collect.py"
+          python3 -u "$RUNNER_TEMP/collect.py"
 
       - name: Convert
+        timeout-minutes: 90
         run: |
           cat > "$RUNNER_TEMP/convert.py" <<'PYEOF'
           #!/usr/bin/env python3
           """Parse each .uasset with UAssetAPI (AnimDump.dll), pull out the raw bone tracks, write one readable .anim.json per animation."""
-          import base64, json, os, struct, subprocess, sys, traceback
+          import base64, json, os, struct, subprocess, sys, time, traceback
 
+          sys.stdout.reconfigure(line_buffering=True)
           DLL, VERSIONS, BONES = sys.argv[1], sys.argv[2].split(","), sys.argv[3]
+          LIMIT = int(sys.argv[4]) if len(sys.argv) > 4 and sys.argv[4].strip().isdigit() else 0
+          TOOL_TIMEOUT = 90          # seconds for one read attempt of one file
           WORK, OUT, DEBUG = "work", "out", "out/debug"
           CORE = {"root", "pelvis", "spine_01", "spine_02", "spine_03", "spine_04", "spine_05", "neck_01", "neck_02", "head",
                   "clavicle_l", "upperarm_l", "lowerarm_l", "hand_l", "clavicle_r", "upperarm_r", "lowerarm_r", "hand_r",
@@ -287,21 +295,23 @@ jobs:
           META = ["AdditiveAnimType", "RefPoseType", "bEnableRootMotion", "RootMotionRootLock", "bForceRootLock", "RateScale", "Interpolation"]
 
 
-          def walk(n):
-              st = [n]
+          WANT = set(["BoneAnimationTracks", "RawAnimationData", "AnimationTrackNames", "NumberOfFrames", "NumberOfKeys", "FrameRate"] + META)
+
+
+          def scan(root):
+              """one pass over the (huge) JSON; stops descending at the properties we want -> {name: [property, ...]}"""
+              found, st = {}, [root]
               while st:
                   c = st.pop()
                   if isinstance(c, dict):
-                      yield c
-                      st.extend(c.values())
+                      nm = c.get("Name")
+                      if nm in WANT and "Value" in c:
+                          found.setdefault(nm, []).append(c)
+                          continue
+                      st.extend(v for v in c.values() if isinstance(v, (dict, list)))
                   elif isinstance(c, list):
-                      st.extend(c)
-
-
-          def named(root, name):
-              for d in walk(root):
-                  if d.get("Name") == name and "Value" in d:
-                      yield d
+                      st.extend(x for x in c if isinstance(x, (dict, list)))
+              return found
 
 
           def kids(prop):
@@ -379,180 +389,22 @@ jobs:
 
 
           def extract(doc):
-              """-> dict(tracks={bone:(pos,rot,scl)}, frames, fps, meta)"""
+              """-> (tracks={bone:(pos,rot,scl)}, info, meta)"""
+              f = scan(doc)
               tracks, info = {}, {}
-              for arr in named(doc, "BoneAnimationTracks"):            # UE 5 (AnimDataModel)
+              for arr in f.get("BoneAnimationTracks", []):            # UE 5 (AnimDataModel)
                   for el in val(arr) or []:
                       k = kids(el)
                       if "Name" in k and "InternalTrackData" in k:
                           tracks[as_name(k["Name"])] = track_of(k["InternalTrackData"])
-              if not tracks:                                           # UE 4 / early UE 5 (AnimSequence.RawAnimationData)
-                  raws = list(named(doc, "RawAnimationData"))
-                  names = list(named(doc, "AnimationTrackNames"))
-                  if raws and names:
-                      for n, t in zip(val(names[0]), val(raws[0])):
-                          tracks[as_name(n)] = track_of(t)
+              if not tracks and f.get("RawAnimationData") and f.get("AnimationTrackNames"):   # UE 4 / early UE 5
+                  for n, t in zip(val(f["AnimationTrackNames"][0]), val(f["RawAnimationData"][0])):
+                      tracks[as_name(n)] = track_of(t)
               for key in ("NumberOfFrames", "NumberOfKeys"):
-                  for p in named(doc, key):
-                      info[key] = int(val(p))
-                      break
-              for p in named(doc, "FrameRate"):
-                  k = kids(p)
-                  if "Numerator" in k and "Denominator" in k:
-                      info["fps"] = float(val(k["Numerator"])) / max(float(val(k["Denominator"])), 1.0)
-                      break
-              meta = {}
-              for m in META:
-                  for p in named(doc, m):
-                      v = val(p)
-                      if not isinstance(v, (dict, list)):
-                          meta[m] = v
-                      break
-              return tracks, info, meta
-
-
-          def structure(n, depth=0, maxd=7, out=None):
-              """compact outline of the JSON (types and names only) so a parser problem can be diagnosed without the huge arrays"""
-              out = [] if out is None else out
-              pad = "  " * depth
-              if isinstance(n, dict):
-                  t = str(n.get("$type", "")).split(",")[0].split(".")[-1]
-                  v = n.get("Value")
-                  out.append(f"{pad}{n.get('Name', '')} <{t}>" + (f" = {v!r}"[:80] if v is not None and not isinstance(v, (list, dict)) else ""))
-                  if depth < maxd:
-                      if isinstance(v, list):
-                          for c in v[:3]:
-                              structure(c, depth + 1, maxd, out)
-                          if len(v) > 3:
-                              out.append(f"{pad}  ... ({len(v)} items)")
-                      elif isinstance(v, dict):
-                          structure(v, depth + 1, maxd, out)
-                      for k2, c in n.items():
-                          if k2 in ("Data", "Exports") and isinstance(c, list):
-                              for cc in c[:4]:
-                                  structure(cc, depth + 1, maxd, out)
-              return out
-
-
-          def run_tool(ver, path, raw):
-              r = subprocess.run(["dotnet", DLL, ver, path, raw], capture_output=True, text=True, timeout=300)
-              return r.returncode, (r.stderr or r.stdout).strip()[-400:]
-
-
-          def main():
-              os.makedirs(DEBUG, exist_ok=True)
-              files = [l.split("|", 1) for l in open(os.path.join(WORK, "files.txt")).read().splitlines() if l.strip()]
-              good, index, errors, dumped = None, [], [], 0
-              raw = os.path.join(WORK, "raw.json")
-              for n, (path, rel) in enumerate(files, 1):
-                  name = os.path.splitext(os.path.basename(rel))[0]
-                  order = ([good] if good else []) + [v for v in VERSIONS if v != good]
-                  res, last_err, tried_ok, doc = None, "", None, None
-                  for ver in order:
+                  if key in f:
                       try:
-                          if os.path.exists(raw):
-                              os.remove(raw)
-                          code, msg = run_tool(ver, path, raw)
-                          if code != 0:
-                              last_err = f"{ver}: {msg}"
-                              continue
-                          tried_ok = ver
-                          doc = json.load(open(raw, encoding="utf-8"))
-                          tracks, info, meta = extract(doc)
-                          if tracks:
-                              res = (ver, tracks, info, meta)
-                              break
-                          last_err = f"{ver}: parsed, but no raw bone tracks found"
-                          if dumped < 3:
-                              with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
-                                  f.write("\n".join(structure(doc)))
-                              dumped += 1
-                      except Exception as e:
-                          last_err = f"{ver}: {type(e).__name__}: {e}"
-                          if dumped < 3 and tried_ok:
-                              traceback.print_exc()
-                              with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
-                                  f.write(last_err + "\n\n" + ("\n".join(structure(doc)) if doc else ""))
-                              dumped += 1
-                  if not res:
-                      errors.append(f"{rel}: {last_err}")
-                      print(f"[{n}/{len(files)}] FAILED {rel}: {last_err}")
-                      continue
-                  ver, tracks, info, meta = res
-                  good = ver
-                  nkeys = info.get("NumberOfKeys") or max(max(len(p), len(r)) for p, r, s in tracks.values())
-                  nkeys = max(int(nkeys), 1)
-                  bones = {}
-                  for b, (p, r, s) in tracks.items():
-                      if BONES == "core" and b not in CORE:
-                          continue
-                      def fill(a, d):
-                          a = a or [d]
-                          if len(a) < nkeys:
-                              a = a + [a[-1]] * (nkeys - len(a))
-                          return a[:nkeys]
-                      entry = {"p": [[round(v, 4) for v in k] for k in fill(p, [0, 0, 0])],
-                               "r": [[round(v, 6) for v in k] for k in fill(r, [0, 0, 0, 1])]}
-                      if s and any(abs(v - 1) > 1e-4 for k in s for v in k):
-                          entry["s"] = [[round(v, 5) for v in k] for k in fill(s, [1, 1, 1])]
-                      bones[b] = entry
-                  fps = info.get("fps", 30.0)
-                  doc_out = {"name": name, "path": rel, "fps": fps, "keys": nkeys, "length_s": round((nkeys - 1) / fps, 4) if nkeys > 1 else 0.0,
-                             "meta": meta, "bone_count_in_asset": len(tracks), "bones": bones}
-                  dest = os.path.join(OUT, os.path.dirname(rel), name + ".anim.json")
-                  os.makedirs(os.path.dirname(dest), exist_ok=True)
-                  with open(dest, "w") as f:
-                      json.dump(doc_out, f, separators=(",", ":"))
-                  index.append({"name": name, "file": os.path.relpath(dest, OUT).replace(os.sep, "/"), "fps": fps, "keys": nkeys,
-                                "length_s": doc_out["length_s"], "bones_saved": len(bones), "bones_in_asset": len(tracks), **{k: v for k, v in meta.items()}})
-                  print(f"[{n}/{len(files)}] ok  {rel}  ({ver}, {nkeys} keys, {len(bones)}/{len(tracks)} bones)")
-              json.dump({"units": "centimetres, Unreal axes (X forward, Y right, Z up, left-handed), quaternions x,y,z,w, bone transforms are LOCAL (relative to the parent bone)",
-                         "bone_parents_assumed_ue5_mannequin": PARENT, "animations": index, "errors": errors},
-                        open(os.path.join(OUT, "index.json"), "w"), indent=1)
-              s = f"Converted {len(index)} of {len(files)} animations; {len(errors)} failed."
-              print(s)
-              with open(os.environ.get("GITHUB_STEP_SUMMARY", os.devnull), "a") as f:
-                  f.write("### Animation conversion\n" + s + "\n\n" + ("\n".join("- " + e for e in errors[:40]) if errors else "") + "\n")
-              if not index:
-                  sys.exit(1)
-
-
-          main()
-          PYEOF
-          mkdir -p out
-          python3 "$RUNNER_TEMP/convert.py" "$RUNNER_TEMP/animdump/bin/AnimDump.dll" "${{ inputs.engine_versions || 'VER_UE5_7,VER_UE5_6,VER_UE5_5,VER_UE5_4,VER_UE5_3,VER_UE5_2,VER_UE5_1,VER_UE5_0' }}" "${{ inputs.bones || 'core' }}"
-
-      - name: Write a README into the result
-        if: ${{ always() }}
-        run: |
-          mkdir -p out
-          cat > out/README.txt <<'TXTEOF'
-          One <name>.anim.json per animation, same folder layout as the source.
-            fps, keys, length_s   timing (keys = number of key frames; a looping clip repeats its first key at the end)
-            meta                  additive type, root-motion flags and similar, when the asset has them
-            bones.<bone>.p        position per key  [x,y,z]      local to the parent bone, centimetres
-            bones.<bone>.r        rotation per key  [x,y,z,w]    local to the parent bone (quaternion)
-            bones.<bone>.s        scale per key, only written when it is not 1
-          Unreal axes: X forward, Y right, Z up (left-handed). index.json lists everything and the assumed bone parents.
-          debug/ appears only when a file could not be read: send those files back so the reader can be fixed.
-          TXTEOF
-
-      - name: Upload the result
-        if: ${{ always() && hashFiles('out/**') != '' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: converted-animations
-          path: out/
-          retention-days: 30
-
-      - name: Commit the result to converted/
-        if: ${{ inputs.commit_results == true }}
-        run: |
-          rm -rf converted
-          mkdir -p converted
-          cp -r out/. converted/
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add converted
-          git commit -m "Add converted animations" || echo "nothing to commit"
-          git push
+                          info[key] = int(val(f[key][0]))
+                      except (TypeError, ValueError):
+                          pass
+              for p in f.get("FrameRate", []):
+             
