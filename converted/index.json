@@ -46,11 +46,2686 @@
    "length_s": 1.4,
    "bones_saved": 35,
    "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Fire",
+   "file": "Assets/Action/MM_Pistol_Fire.anim.json",
+   "fps": 30.0,
+   "keys": 21,
+   "length_s": 0.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Equip",
+   "file": "Assets/Action/MM_Rifle_Equip.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Fire",
+   "file": "Assets/Action/MM_Rifle_Fire.anim.json",
+   "fps": 30.0,
+   "keys": 17,
+   "length_s": 0.5333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_CC",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_CC.anim.json",
+   "fps": 30.0,
+   "keys": 3,
+   "length_s": 0.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_CD",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_CD.anim.json",
+   "fps": 30.0,
+   "keys": 3,
+   "length_s": 0.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_CD_45",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_CD_45.anim.json",
+   "fps": 30.0,
+   "keys": 3,
+   "length_s": 0.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_CU",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_CU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_CU_45",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_CU_45.anim.json",
+   "fps": 30.0,
+   "keys": 3,
+   "length_s": 0.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LBC",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LBD",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LBU",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LC",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LD",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_LU",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_LU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RBC",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RBD",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RBU",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RC",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RD",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS_AO_RU",
+   "file": "Assets/AimOffset/MM_Pistol_Idle_ADS_AO_RU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_CC",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_CC.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_CD",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_CD.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_CU",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_CU.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LBC",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LBC.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LBD",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LBD.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LBU",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LBU.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LC",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LC.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LD",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LD.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_LU",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_LU.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RBC",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RBC.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RBD",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RBD.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RBU",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RBU.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RC",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RC.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RD",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RD.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle_AO_RU",
+   "file": "Assets/AimOffset/MM_Rifle_Crouch_Idle_AO_RU.anim.json",
+   "fps": 30.0,
+   "keys": 2,
+   "length_s": 0.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_CC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_CC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_CD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_CD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_CU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_CU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LBC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LBD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LBU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_LU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_LU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RBC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RBD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RBU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS_AO_RU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_ADS_AO_RU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_CC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_CC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_CD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_CD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_CU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_CU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LBC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LBD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LBU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_LU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_LU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RBC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RBD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RBU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RC",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RD",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire_AO_RU",
+   "file": "Assets/AimOffset/MM_Rifle_Idle_Hipfire_AO_RU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_CC",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_CC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_CD",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_CD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_CU",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_CU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LBC",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LBD",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LBU",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LC",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LD",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_LU",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_LU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RBC",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RBC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RBD",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RBD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RBU",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RBU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RC",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RC.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RD",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RD.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready_AO_RU",
+   "file": "Assets/AimOffset/MM_Unarmed_Idle_Ready_AO_RU.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Entry",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Entry.anim.json",
+   "fps": 30.0,
+   "keys": 23,
+   "length_s": 0.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Exit",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Exit.anim.json",
+   "fps": 30.0,
+   "keys": 23,
+   "length_s": 0.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Idle",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Idle.anim.json",
+   "fps": 30.0,
+   "keys": 236,
+   "length_s": 7.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_OverridePose",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_OverridePose.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_TurnLeft_180",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 60,
+   "length_s": 1.9667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_TurnLeft_90",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_TurnRight_180",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 76,
+   "length_s": 2.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_TurnRight_90",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 50,
+   "length_s": 1.6333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Bwd",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 33,
+   "length_s": 1.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Bwd_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 81,
+   "length_s": 2.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Bwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 65,
+   "length_s": 2.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Bwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Fwd",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 39,
+   "length_s": 1.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Fwd_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Fwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Fwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Left",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 34,
+   "length_s": 1.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Left_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 70,
+   "length_s": 2.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Left_Start",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 63,
+   "length_s": 2.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Left_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Right",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 36,
+   "length_s": 1.1667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Right_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 77,
+   "length_s": 2.5333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Right_Start",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 65,
+   "length_s": 2.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Crouch_Walk_Right_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Crouch_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 50,
+   "length_s": 1.6333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_IdleBreak_Scan",
+   "file": "Assets/Pistol/MM_Pistol_IdleBreak_Scan.anim.json",
+   "fps": 30.0,
+   "keys": 196,
+   "length_s": 6.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_ADS",
+   "file": "Assets/Pistol/MM_Pistol_Idle_ADS.anim.json",
+   "fps": 30.0,
+   "keys": 151,
+   "length_s": 5.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Idle_Hipfire",
+   "file": "Assets/Pistol/MM_Pistol_Idle_Hipfire.anim.json",
+   "fps": 30.0,
+   "keys": 192,
+   "length_s": 6.3667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Bwd",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 46,
+   "length_s": 1.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Bwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Bwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 31,
+   "length_s": 1.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Fwd",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 35,
+   "length_s": 1.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Fwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Fwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 37,
+   "length_s": 1.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Left",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Left.anim.json",
+   "fps": 30.0,
+   "keys": 31,
+   "length_s": 1.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Left_Start",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 66,
+   "length_s": 2.1667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Left_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 39,
+   "length_s": 1.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Pivot_Bwd",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Pivot_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Pivot_Fwd",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Pivot_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 49,
+   "length_s": 1.6,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Pivot_Left",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Pivot_Left.anim.json",
+   "fps": 30.0,
+   "keys": 58,
+   "length_s": 1.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Pivot_Right",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Pivot_Right.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Right",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Right.anim.json",
+   "fps": 30.0,
+   "keys": 34,
+   "length_s": 1.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Right_Start",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 75,
+   "length_s": 2.4667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Right_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 59,
+   "length_s": 1.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jog_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Jog_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 53,
+   "length_s": 1.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_Apex",
+   "file": "Assets/Pistol/MM_Pistol_Jump_Apex.anim.json",
+   "fps": 30.0,
+   "keys": 21,
+   "length_s": 0.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_Fall_Land",
+   "file": "Assets/Pistol/MM_Pistol_Jump_Fall_Land.anim.json",
+   "fps": 30.0,
+   "keys": 11,
+   "length_s": 0.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_Fall_Loop",
+   "file": "Assets/Pistol/MM_Pistol_Jump_Fall_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_RecoveryAdditive",
+   "file": "Assets/Pistol/MM_Pistol_Jump_RecoveryAdditive.anim.json",
+   "fps": 30.0,
+   "keys": 22,
+   "length_s": 0.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_Start",
+   "file": "Assets/Pistol/MM_Pistol_Jump_Start.anim.json",
+   "fps": 30.0,
+   "keys": 7,
+   "length_s": 0.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Jump_Start_Loop",
+   "file": "Assets/Pistol/MM_Pistol_Jump_Start_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_TurnLeft_180",
+   "file": "Assets/Pistol/MM_Pistol_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_TurnLeft_90",
+   "file": "Assets/Pistol/MM_Pistol_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_TurnRight_180",
+   "file": "Assets/Pistol/MM_Pistol_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_TurnRight_90",
+   "file": "Assets/Pistol/MM_Pistol_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Bwd",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 35,
+   "length_s": 1.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Bwd_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 84,
+   "length_s": 2.7667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Bwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 57,
+   "length_s": 1.8667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Bwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Fwd",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 42,
+   "length_s": 1.3667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Fwd_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 65,
+   "length_s": 2.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Fwd_Start",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Fwd_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 55,
+   "length_s": 1.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Left",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 36,
+   "length_s": 1.1667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Left_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 81,
+   "length_s": 2.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Left_Start",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Left_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 55,
+   "length_s": 1.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Right",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 19,
+   "length_s": 0.6,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Right_Pivot",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 84,
+   "length_s": 2.7667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Right_Start",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Pistol_Walk_Right_Stop",
+   "file": "Assets/Pistol/MM_Pistol_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 41,
+   "length_s": 1.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Entry",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Entry.anim.json",
+   "fps": 30.0,
+   "keys": 23,
+   "length_s": 0.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Exit",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Exit.anim.json",
+   "fps": 30.0,
+   "keys": 28,
+   "length_s": 0.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Idle",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Idle.anim.json",
+   "fps": 30.0,
+   "keys": 141,
+   "length_s": 4.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_OverridePose",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_OverridePose.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_TurnLeft_180",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 71,
+   "length_s": 2.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_TurnLeft_90",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_TurnRight_180",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 71,
+   "length_s": 2.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_TurnRight_90",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Bwd",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 37,
+   "length_s": 1.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Bwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Bwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 68,
+   "length_s": 2.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Bwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Fwd",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 59,
+   "length_s": 1.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Fwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 71,
+   "length_s": 2.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Fwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 62,
+   "length_s": 2.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Fwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Left",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 34,
+   "length_s": 1.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Left_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Left_Start",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 63,
+   "length_s": 2.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Left_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Right",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 37,
+   "length_s": 1.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Right_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 63,
+   "length_s": 2.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Right_Start",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 65,
+   "length_s": 2.1333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Crouch_Walk_Right_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Crouch_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 54,
+   "length_s": 1.7667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Hipfire_OverridePose",
+   "file": "Assets/Rifle/MM_Rifle_Hipfire_OverridePose.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_IdleBreak_Fidget",
+   "file": "Assets/Rifle/MM_Rifle_IdleBreak_Fidget.anim.json",
+   "fps": 30.0,
+   "keys": 136,
+   "length_s": 4.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_IdleBreak_Scan",
+   "file": "Assets/Rifle/MM_Rifle_IdleBreak_Scan.anim.json",
+   "fps": 30.0,
+   "keys": 244,
+   "length_s": 8.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_ADS",
+   "file": "Assets/Rifle/MM_Rifle_Idle_ADS.anim.json",
+   "fps": 30.0,
+   "keys": 103,
+   "length_s": 3.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Idle_Hipfire",
+   "file": "Assets/Rifle/MM_Rifle_Idle_Hipfire.anim.json",
+   "fps": 30.0,
+   "keys": 251,
+   "length_s": 8.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Bwd",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 47,
+   "length_s": 1.5333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Bwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 72,
+   "length_s": 2.3667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Bwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Bwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 1046,
+   "length_s": 34.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Fwd",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Fwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Fwd_RAW",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Fwd_RAW.anim.json",
+   "fps": 30.0,
+   "keys": 60,
+   "length_s": 1.9667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Fwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 66,
+   "length_s": 2.1667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Fwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Lean_Center",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Lean_Center.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161,
+   "bEnableRootMotion": true,
+   "bForceRootLock": true
+  },
+  {
+   "name": "MM_Rifle_Jog_Lean_Right",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Lean_Right.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161,
+   "bEnableRootMotion": true,
+   "bForceRootLock": true
+  },
+  {
+   "name": "MM_Rifle_Jog_Leans_Left",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Leans_Left.anim.json",
+   "fps": 30.0,
+   "keys": 1,
+   "length_s": 0.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161,
+   "bEnableRootMotion": true,
+   "bForceRootLock": true
+  },
+  {
+   "name": "MM_Rifle_Jog_Left",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Left.anim.json",
+   "fps": 30.0,
+   "keys": 48,
+   "length_s": 1.5667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Left_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 59,
+   "length_s": 1.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Left_Start",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 70,
+   "length_s": 2.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Left_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 70,
+   "length_s": 2.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Right",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Right.anim.json",
+   "fps": 30.0,
+   "keys": 34,
+   "length_s": 1.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Right_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Right_Start",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jog_Right_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Jog_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 53,
+   "length_s": 1.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_Apex",
+   "file": "Assets/Rifle/MM_Rifle_Jump_Apex.anim.json",
+   "fps": 30.0,
+   "keys": 21,
+   "length_s": 0.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_Fall_Land",
+   "file": "Assets/Rifle/MM_Rifle_Jump_Fall_Land.anim.json",
+   "fps": 30.0,
+   "keys": 13,
+   "length_s": 0.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_Fall_Loop",
+   "file": "Assets/Rifle/MM_Rifle_Jump_Fall_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 91,
+   "length_s": 3.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_RecoveryAdditive",
+   "file": "Assets/Rifle/MM_Rifle_Jump_RecoveryAdditive.anim.json",
+   "fps": 30.0,
+   "keys": 29,
+   "length_s": 0.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_Start",
+   "file": "Assets/Rifle/MM_Rifle_Jump_Start.anim.json",
+   "fps": 30.0,
+   "keys": 8,
+   "length_s": 0.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Jump_Start_Loop",
+   "file": "Assets/Rifle/MM_Rifle_Jump_Start_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_TurnLeft_180",
+   "file": "Assets/Rifle/MM_Rifle_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_TurnLeft_90",
+   "file": "Assets/Rifle/MM_Rifle_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 51,
+   "length_s": 1.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_TurnRight_180",
+   "file": "Assets/Rifle/MM_Rifle_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 80,
+   "length_s": 2.6333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_TurnRight_90",
+   "file": "Assets/Rifle/MM_Rifle_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Bwd",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 64,
+   "length_s": 2.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Bwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Bwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 63,
+   "length_s": 2.0667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Bwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 86,
+   "length_s": 2.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Fwd",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Fwd_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Fwd_Start",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Fwd_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 60,
+   "length_s": 1.9667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Left",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 38,
+   "length_s": 1.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Left_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 55,
+   "length_s": 1.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Left_Start",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 58,
+   "length_s": 1.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Left_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Right",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 40,
+   "length_s": 1.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Right_Pivot",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 58,
+   "length_s": 1.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Right_Start",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 50,
+   "length_s": 1.6333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Rifle_Walk_Right_Stop",
+   "file": "Assets/Rifle/MM_Rifle_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 75,
+   "length_s": 2.4667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Shotgun_Idle_ADS",
+   "file": "Assets/Shotgun/MM_Shotgun_Idle_ADS.anim.json",
+   "fps": 30.0,
+   "keys": 103,
+   "length_s": 3.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Shotgun_Idle_Hipfire",
+   "file": "Assets/Shotgun/MM_Shotgun_Idle_Hipfire.anim.json",
+   "fps": 30.0,
+   "keys": 251,
+   "length_s": 8.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Entry",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Entry.anim.json",
+   "fps": 30.0,
+   "keys": 23,
+   "length_s": 0.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Exit",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Exit.anim.json",
+   "fps": 30.0,
+   "keys": 27,
+   "length_s": 0.8667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Idle",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Idle.anim.json",
+   "fps": 30.0,
+   "keys": 284,
+   "length_s": 9.4333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_TurnLeft_180",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 71,
+   "length_s": 2.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_TurnLeft_90",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 76,
+   "length_s": 2.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_TurnRight_180",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 75,
+   "length_s": 2.4667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_TurnRight_90",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 53,
+   "length_s": 1.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Bwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 53,
+   "length_s": 1.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Bwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 81,
+   "length_s": 2.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Bwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 47,
+   "length_s": 1.5333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Bwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 90,
+   "length_s": 2.9667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Fwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 55,
+   "length_s": 1.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Fwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Fwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 47,
+   "length_s": 1.5333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Fwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 73,
+   "length_s": 2.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Left",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 53,
+   "length_s": 1.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Left_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 70,
+   "length_s": 2.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Left_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 38,
+   "length_s": 1.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Left_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Right",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 41,
+   "length_s": 1.3333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Right_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 85,
+   "length_s": 2.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Right_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 28,
+   "length_s": 0.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Crouch_Walk_Right_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Crouch_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 39,
+   "length_s": 1.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_IdleBreak_Fidget",
+   "file": "Assets/Unarmed/MM_Unarmed_IdleBreak_Fidget.anim.json",
+   "fps": 30.0,
+   "keys": 127,
+   "length_s": 4.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_IdleBreak_Scan",
+   "file": "Assets/Unarmed/MM_Unarmed_IdleBreak_Scan.anim.json",
+   "fps": 30.0,
+   "keys": 278,
+   "length_s": 9.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Idle_Ready",
+   "file": "Assets/Unarmed/MM_Unarmed_Idle_Ready.anim.json",
+   "fps": 30.0,
+   "keys": 228,
+   "length_s": 7.5667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Bwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 48,
+   "length_s": 1.5667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Bwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Bwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 23,
+   "length_s": 0.7333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Bwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Fwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 52,
+   "length_s": 1.7,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Fwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 49,
+   "length_s": 1.6,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Fwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 46,
+   "length_s": 1.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Fwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 43,
+   "length_s": 1.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Left",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Left.anim.json",
+   "fps": 30.0,
+   "keys": 48,
+   "length_s": 1.5667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Left_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Left_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 24,
+   "length_s": 0.7667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Left_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 46,
+   "length_s": 1.5,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Pivot_Right",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Pivot_Right.anim.json",
+   "fps": 30.0,
+   "keys": 100,
+   "length_s": 3.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Right",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Right.anim.json",
+   "fps": 30.0,
+   "keys": 48,
+   "length_s": 1.5667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Right_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 42,
+   "length_s": 1.3667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jog_Right_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jog_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 39,
+   "length_s": 1.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_Apex",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_Apex.anim.json",
+   "fps": 30.0,
+   "keys": 21,
+   "length_s": 0.6667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_Fall_Land",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_Fall_Land.anim.json",
+   "fps": 30.0,
+   "keys": 13,
+   "length_s": 0.4,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_Fall_Loop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_Fall_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 91,
+   "length_s": 3.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_RecoveryAdditive",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_RecoveryAdditive.anim.json",
+   "fps": 30.0,
+   "keys": 29,
+   "length_s": 0.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_Start.anim.json",
+   "fps": 30.0,
+   "keys": 8,
+   "length_s": 0.2333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Jump_Start_Loop",
+   "file": "Assets/Unarmed/MM_Unarmed_Jump_Start_Loop.anim.json",
+   "fps": 30.0,
+   "keys": 61,
+   "length_s": 2.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_TurnLeft_180",
+   "file": "Assets/Unarmed/MM_Unarmed_TurnLeft_180.anim.json",
+   "fps": 30.0,
+   "keys": 74,
+   "length_s": 2.4333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_TurnLeft_90",
+   "file": "Assets/Unarmed/MM_Unarmed_TurnLeft_90.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_TurnRight_180",
+   "file": "Assets/Unarmed/MM_Unarmed_TurnRight_180.anim.json",
+   "fps": 30.0,
+   "keys": 75,
+   "length_s": 2.4667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_TurnRight_90",
+   "file": "Assets/Unarmed/MM_Unarmed_TurnRight_90.anim.json",
+   "fps": 30.0,
+   "keys": 56,
+   "length_s": 1.8333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Bwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Bwd.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Bwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Bwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 121,
+   "length_s": 4.0,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Bwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Bwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Bwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Bwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 64,
+   "length_s": 2.1,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Fwd",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Fwd.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Fwd_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Fwd_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 60,
+   "length_s": 1.9667,
+   "bones_saved": 35,
+   "bones_in_asset": 161,
+   "bEnableRootMotion": true,
+   "bForceRootLock": true
+  },
+  {
+   "name": "MM_Unarmed_Walk_Fwd_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Fwd_Start.anim.json",
+   "fps": 30.0,
+   "keys": 49,
+   "length_s": 1.6,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Fwd_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Fwd_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 59,
+   "length_s": 1.9333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Left",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Left.anim.json",
+   "fps": 30.0,
+   "keys": 44,
+   "length_s": 1.4333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Left_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Left_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 92,
+   "length_s": 3.0333,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Left_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Left_Start.anim.json",
+   "fps": 30.0,
+   "keys": 58,
+   "length_s": 1.9,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Left_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Left_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 67,
+   "length_s": 2.2,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Right",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Right.anim.json",
+   "fps": 30.0,
+   "keys": 69,
+   "length_s": 2.2667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Right_Pivot",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Right_Pivot.anim.json",
+   "fps": 30.0,
+   "keys": 117,
+   "length_s": 3.8667,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Right_Start",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Right_Start.anim.json",
+   "fps": 30.0,
+   "keys": 85,
+   "length_s": 2.8,
+   "bones_saved": 35,
+   "bones_in_asset": 161
+  },
+  {
+   "name": "MM_Unarmed_Walk_Right_Stop",
+   "file": "Assets/Unarmed/MM_Unarmed_Walk_Right_Stop.anim.json",
+   "fps": 30.0,
+   "keys": 70,
+   "length_s": 2.3,
+   "bones_saved": 35,
+   "bones_in_asset": 161
   }
  ],
  "skipped": [
   {
    "file": "Assets/Action/MM_Pistol_Equip_Montage.uasset",
+   "reason": "not a plain animation (AnimMontage), it has no bone tracks of its own"
+  },
+  {
+   "file": "Assets/Action/MM_Pistol_Fire_Montage.uasset",
+   "reason": "not a plain animation (AnimMontage), it has no bone tracks of its own"
+  },
+  {
+   "file": "Assets/Action/MM_Rifle_Equip_Montage.uasset",
+   "reason": "not a plain animation (AnimMontage), it has no bone tracks of its own"
+  },
+  {
+   "file": "Assets/Action/MM_Rifle_Fire_Montage.uasset",
    "reason": "not a plain animation (AnimMontage), it has no bone tracks of its own"
   }
  ],
