@@ -1,0 +1,524 @@
+name: Convert Unreal animations to readable JSON
+on:
+  workflow_dispatch:
+    inputs:
+      bones:
+        description: "Bones to keep: core (about 35 bones, small files) or all (every bone, fingers and twist bones too)"
+        type: choice
+        options: [core, all]
+        default: core
+      engine_versions:
+        description: "Unreal versions to try, newest first (the first one that reads the file is used)"
+        type: string
+        default: "VER_UE5_7,VER_UE5_6,VER_UE5_5,VER_UE5_4,VER_UE5_3,VER_UE5_2,VER_UE5_1,VER_UE5_0"
+      commit_results:
+        description: "Also commit the converted files to a converted/ folder in the repository"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - name: Check out (with Git LFS files)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+
+      - name: Build the UAssetAPI reader
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --recurse-submodules https://github.com/atenfyr/UAssetAPI.git "$RUNNER_TEMP/UAssetAPI"
+          CSPROJ="$(find "$RUNNER_TEMP/UAssetAPI" -name UAssetAPI.csproj | head -1)"
+          TFM="$(grep -oE 'net[0-9]+\.0' "$CSPROJ" | sort -V | tail -1 || true)"
+          TFM="${TFM:-net8.0}"
+          echo "UAssetAPI project: $CSPROJ  (target $TFM)"
+          mkdir -p "$RUNNER_TEMP/animdump"
+          cd "$RUNNER_TEMP/animdump"
+          cat > AnimDump.csproj <<CSPROJEOF
+          <Project Sdk="Microsoft.NET.Sdk">
+            <PropertyGroup>
+              <OutputType>Exe</OutputType>
+              <TargetFramework>$TFM</TargetFramework>
+              <ImplicitUsings>enable</ImplicitUsings>
+              <Nullable>disable</Nullable>
+              <AssemblyName>AnimDump</AssemblyName>
+            </PropertyGroup>
+            <ItemGroup>
+              <ProjectReference Include="$CSPROJ" />
+            </ItemGroup>
+          </Project>
+          CSPROJEOF
+          cat > Program.cs <<'CSEOF'
+          using System.Reflection;
+          using UAssetAPI;
+          using UAssetAPI.UnrealTypes;
+
+          // usage: AnimDump <EngineVersion> <in.uasset> <out.json>   (writes the whole asset as UAssetAPI JSON)
+          if (args.Length < 3) { Console.Error.WriteLine("usage: AnimDump <EngineVersion> <in.uasset> <out.json>"); return 2; }
+          if (!Enum.TryParse<EngineVersion>(args[0], out var ver)) { Console.Error.WriteLine("unknown engine version " + args[0]); return 3; }
+          try
+          {
+              var asset = new UAsset(args[1], ver);
+              MethodInfo m = typeof(UAsset).GetMethods().First(x => x.Name == "SerializeJson" && x.ReturnType == typeof(string) && x.GetParameters().All(p => p.IsOptional));
+              object[] a = m.GetParameters().Select(p => p.HasDefaultValue ? p.DefaultValue : Type.Missing).ToArray();
+              File.WriteAllText(args[2], (string)m.Invoke(asset, a));
+              return 0;
+          }
+          catch (Exception e)
+          {
+              Console.Error.WriteLine(e.GetType().Name + ": " + e.Message);
+              return 1;
+          }
+          CSEOF
+          dotnet publish -c Release -o "$RUNNER_TEMP/animdump/bin" 2>&1 | tail -25
+          ls "$RUNNER_TEMP/animdump/bin/AnimDump.dll"
+
+      - name: Find the .uasset files (unzip Assets.zip, resolve LFS pointers)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cat > "$RUNNER_TEMP/collect.py" <<'PYEOF'
+          #!/usr/bin/env python3
+          """Find every .uasset (in the repo and inside any zip), turn Git LFS pointer files into real files, write work/files.txt."""
+          import base64, json, os, re, subprocess, sys, urllib.request, zipfile
+
+          ROOT = os.getcwd()
+          WORK = os.path.join(ROOT, "work")
+          SKIP = (".git", "work", "out", "tools", "node_modules")
+          POINTER = re.compile(rb"^version https://git-lfs\.github\.com/spec/v1\s+oid sha256:([0-9a-f]{64})\s+size (\d+)", re.S)
+
+
+          def pointer_info(path):
+              try:
+                  with open(path, "rb") as f:
+                      head = f.read(300)
+              except OSError:
+                  return None
+              m = POINTER.match(head)
+              return (m.group(1).decode(), int(m.group(2))) if m else None
+
+
+          def unzip_all():
+              n = 0
+              for dp, dn, fn in os.walk(ROOT):
+                  dn[:] = [d for d in dn if d not in SKIP]
+                  for f in fn:
+                      if f.lower().endswith(".zip"):
+                          dest = os.path.join(WORK, "zip", os.path.splitext(f)[0])
+                          print("unzipping", os.path.join(dp, f))
+                          try:
+                              with zipfile.ZipFile(os.path.join(dp, f)) as z:
+                                  z.extractall(dest)
+                                  n += 1
+                          except zipfile.BadZipFile:
+                              print("  not a readable zip (is it an LFS pointer?)")
+              return n
+
+
+          def gather():
+              found = {}  # rel -> (abs, pointer or None)  (a real file beats a pointer)
+              roots = [(ROOT, SKIP)]
+              zdir = os.path.join(WORK, "zip")
+              if os.path.isdir(zdir):
+                  for d in sorted(os.listdir(zdir)):
+                      roots.append((os.path.join(zdir, d), ()))
+              for base, skip in roots:
+                  for dp, dn, fn in os.walk(base):
+                      if base == ROOT:
+                          dn[:] = [d for d in dn if d not in skip]
+                      for f in fn:
+                          if not f.lower().endswith(".uasset"):
+                              continue
+                          ap = os.path.join(dp, f)
+                          rel = os.path.relpath(ap, base).replace(os.sep, "/")
+                          ptr = pointer_info(ap)
+                          if rel not in found or (found[rel][1] and not ptr):
+                              found[rel] = (ap, ptr)
+              return found
+
+
+          def lfs_download(pointers):
+              """pointers: {rel: (abs, (oid,size))}. Tries the repository's own LFS store (shared with its forks)."""
+              token = os.environ.get("GITHUB_TOKEN", "")
+              repo = os.environ.get("GITHUB_REPOSITORY", "")
+              server = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+              if not repo:
+                  return {}
+              url = f"{server}/{repo}.git/info/lfs/objects/batch"
+              auth = "Basic " + base64.b64encode(f"x-access-token:{token}".encode()).decode()
+              got = {}
+              items = list(pointers.items())
+              for i in range(0, len(items), 50):
+                  chunk = items[i:i + 50]
+                  body = {"operation": "download", "transfers": ["basic"],
+                          "objects": [{"oid": p[1][0], "size": p[1][1]} for _, p in chunk]}
+                  req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST", headers={
+                      "Accept": "application/vnd.git-lfs+json", "Content-Type": "application/vnd.git-lfs+json", "Authorization": auth})
+                  try:
+                      resp = json.load(urllib.request.urlopen(req, timeout=60))
+                  except Exception as e:
+                      print("LFS batch request failed:", e)
+                      return got
+                  by_oid = {o["oid"]: o for o in resp.get("objects", [])}
+                  for rel, (ap, (oid, size)) in chunk:
+                      o = by_oid.get(oid, {})
+                      act = o.get("actions", {}).get("download")
+                      if not act:
+                          continue
+                      try:
+                          r = urllib.request.Request(act["href"], headers=act.get("header", {}))
+                          data = urllib.request.urlopen(r, timeout=120).read()
+                      except Exception as e:
+                          print("  download failed for", rel, e)
+                          continue
+                      if len(data) != size:
+                          continue
+                      dest = os.path.join(WORK, "lfs", rel)
+                      os.makedirs(os.path.dirname(dest), exist_ok=True)
+                      with open(dest, "wb") as f:
+                          f.write(data)
+                      got[rel] = dest
+              return got
+
+
+          def main():
+              os.makedirs(WORK, exist_ok=True)
+              unzip_all()
+              found = gather()
+              print("found", len(found), ".uasset files")
+              ptrs = {rel: (ap, p) for rel, (ap, p) in found.items() if p}
+              resolved = {}
+              if ptrs:
+                  print(len(ptrs), "of them are Git LFS pointers (131-byte stubs); trying to fetch the real files from this repository's LFS store")
+                  resolved = lfs_download(ptrs)
+                  print("fetched", len(resolved), "of", len(ptrs))
+              lines = []
+              for rel, (ap, p) in sorted(found.items()):
+                  if p:
+                      if rel in resolved:
+                          lines.append(f"{resolved[rel]}|{rel}")
+                  else:
+                      lines.append(f"{ap}|{rel}")
+              with open(os.path.join(WORK, "files.txt"), "w") as f:
+                  f.write("\n".join(lines))
+              missing = len(found) - len(lines)
+              print("usable files:", len(lines), " unusable pointers:", missing)
+              if not lines:
+                  print("::error::No real .uasset files found. The files in this repository / zip are Git LFS pointers and the LFS objects could not be fetched. "
+                        "Commit the real .uasset files (git lfs track '*.uasset' and push them from the machine that has the real files), then run again.")
+                  sys.exit(1)
+              if missing:
+                  print(f"::warning::{missing} .uasset files were only LFS pointers and were skipped.")
+
+
+          main()
+          PYEOF
+          python3 "$RUNNER_TEMP/collect.py"
+
+      - name: Convert
+        run: |
+          cat > "$RUNNER_TEMP/convert.py" <<'PYEOF'
+          #!/usr/bin/env python3
+          """Parse each .uasset with UAssetAPI (AnimDump.dll), pull out the raw bone tracks, write one readable .anim.json per animation."""
+          import base64, json, os, struct, subprocess, sys, traceback
+
+          DLL, VERSIONS, BONES = sys.argv[1], sys.argv[2].split(","), sys.argv[3]
+          WORK, OUT, DEBUG = "work", "out", "out/debug"
+          CORE = {"root", "pelvis", "spine_01", "spine_02", "spine_03", "spine_04", "spine_05", "neck_01", "neck_02", "head",
+                  "clavicle_l", "upperarm_l", "lowerarm_l", "hand_l", "clavicle_r", "upperarm_r", "lowerarm_r", "hand_r",
+                  "thigh_l", "calf_l", "foot_l", "ball_l", "thigh_r", "calf_r", "foot_r", "ball_r",
+                  "ik_foot_root", "ik_foot_l", "ik_foot_r", "ik_hand_root", "ik_hand_gun", "ik_hand_l", "ik_hand_r", "interaction", "center_of_mass"}
+          # UE5 mannequin (Manny / Quinn) hierarchy of the core bones, for whoever reads the files.
+          PARENT = {"root": None, "pelvis": "root", "spine_01": "pelvis", "spine_02": "spine_01", "spine_03": "spine_02", "spine_04": "spine_03",
+                    "spine_05": "spine_04", "neck_01": "spine_05", "neck_02": "neck_01", "head": "neck_02",
+                    "clavicle_l": "spine_05", "upperarm_l": "clavicle_l", "lowerarm_l": "upperarm_l", "hand_l": "lowerarm_l",
+                    "clavicle_r": "spine_05", "upperarm_r": "clavicle_r", "lowerarm_r": "upperarm_r", "hand_r": "lowerarm_r",
+                    "thigh_l": "pelvis", "calf_l": "thigh_l", "foot_l": "calf_l", "ball_l": "foot_l",
+                    "thigh_r": "pelvis", "calf_r": "thigh_r", "foot_r": "calf_r", "ball_r": "foot_r",
+                    "ik_foot_root": "root", "ik_foot_l": "ik_foot_root", "ik_foot_r": "ik_foot_root", "ik_hand_root": "root",
+                    "ik_hand_gun": "ik_hand_root", "ik_hand_l": "ik_hand_gun", "ik_hand_r": "ik_hand_gun", "interaction": "root", "center_of_mass": "root"}
+          META = ["AdditiveAnimType", "RefPoseType", "bEnableRootMotion", "RootMotionRootLock", "bForceRootLock", "RateScale", "Interpolation"]
+
+
+          def walk(n):
+              st = [n]
+              while st:
+                  c = st.pop()
+                  if isinstance(c, dict):
+                      yield c
+                      st.extend(c.values())
+                  elif isinstance(c, list):
+                      st.extend(c)
+
+
+          def named(root, name):
+              for d in walk(root):
+                  if d.get("Name") == name and "Value" in d:
+                      yield d
+
+
+          def kids(prop):
+              v = prop.get("Value")
+              if isinstance(v, list):
+                  return {c.get("Name"): c for c in v if isinstance(c, dict) and "Name" in c}
+              return {}
+
+
+          def val(p):
+              v = p.get("Value") if isinstance(p, dict) else p
+              while isinstance(v, dict) and "Value" in v and not ("X" in v):
+                  v = v["Value"]
+              return v
+
+
+          def as_name(p):
+              v = val(p)
+              if isinstance(v, dict):
+                  v = v.get("Value", v.get("Name", ""))
+              return str(v)
+
+
+          def nums(x, width):
+              """One key (Vector / Quat) in any shape UAssetAPI might give it -> list of floats."""
+              if isinstance(x, dict):
+                  if "X" in x and "Y" in x:
+                      r = [x["X"], x["Y"], x.get("Z", 0.0)] + ([x.get("W", 1.0)] if width == 4 else [])
+                      return [float(v) for v in r[:width]]
+                  if "Value" in x:
+                      return nums(x["Value"], width)
+              if isinstance(x, list):
+                  if x and isinstance(x[0], dict) and "Name" in x[0]:
+                      m = {c["Name"]: val(c) for c in x}
+                      if "X" in m:
+                          return nums(m, width)
+                  if x and all(isinstance(v, (int, float)) for v in x):
+                      return [float(v) for v in x[:width]]
+              raise ValueError("unknown key shape: " + repr(x)[:120])
+
+
+          def bytes_of(v):
+              if isinstance(v, str):
+                  return base64.b64decode(v)
+              if isinstance(v, list) and all(isinstance(b, int) for b in v):
+                  return bytes(b & 255 for b in v)
+              return None
+
+
+          def decode_binary(b):
+              """FRawAnimSequenceTrack saved natively: int32 count + FVector3f[] , int32 count + FQuat4f[] , int32 count + FVector3f[]."""
+              i, out = 0, []
+              for w in (3, 4, 3):
+                  (c,) = struct.unpack_from("<i", b, i)
+                  i += 4
+                  if c < 0 or i + c * w * 4 > len(b):
+                      raise ValueError("bad raw track")
+                  out.append([list(struct.unpack_from("<" + "f" * w, b, i + k * w * 4)) for k in range(c)])
+                  i += c * w * 4
+              return out
+
+
+          def keys(prop, width):
+              v = val(prop) if prop is not None else []
+              return [nums(e, width) for e in v] if isinstance(v, list) else []
+
+
+          def track_of(itd):
+              """itd = the InternalTrackData / RawAnimSequenceTrack property (or the element itself) -> (pos, rot, scale)."""
+              b = bytes_of(val(itd))
+              if b is not None:
+                  return decode_binary(b)
+              k = kids(itd)
+              return keys(k.get("PosKeys"), 3), keys(k.get("RotKeys"), 4), keys(k.get("ScaleKeys"), 3)
+
+
+          def extract(doc):
+              """-> dict(tracks={bone:(pos,rot,scl)}, frames, fps, meta)"""
+              tracks, info = {}, {}
+              for arr in named(doc, "BoneAnimationTracks"):            # UE 5 (AnimDataModel)
+                  for el in val(arr) or []:
+                      k = kids(el)
+                      if "Name" in k and "InternalTrackData" in k:
+                          tracks[as_name(k["Name"])] = track_of(k["InternalTrackData"])
+              if not tracks:                                           # UE 4 / early UE 5 (AnimSequence.RawAnimationData)
+                  raws = list(named(doc, "RawAnimationData"))
+                  names = list(named(doc, "AnimationTrackNames"))
+                  if raws and names:
+                      for n, t in zip(val(names[0]), val(raws[0])):
+                          tracks[as_name(n)] = track_of(t)
+              for key in ("NumberOfFrames", "NumberOfKeys"):
+                  for p in named(doc, key):
+                      info[key] = int(val(p))
+                      break
+              for p in named(doc, "FrameRate"):
+                  k = kids(p)
+                  if "Numerator" in k and "Denominator" in k:
+                      info["fps"] = float(val(k["Numerator"])) / max(float(val(k["Denominator"])), 1.0)
+                      break
+              meta = {}
+              for m in META:
+                  for p in named(doc, m):
+                      v = val(p)
+                      if not isinstance(v, (dict, list)):
+                          meta[m] = v
+                      break
+              return tracks, info, meta
+
+
+          def structure(n, depth=0, maxd=7, out=None):
+              """compact outline of the JSON (types and names only) so a parser problem can be diagnosed without the huge arrays"""
+              out = [] if out is None else out
+              pad = "  " * depth
+              if isinstance(n, dict):
+                  t = str(n.get("$type", "")).split(",")[0].split(".")[-1]
+                  v = n.get("Value")
+                  out.append(f"{pad}{n.get('Name', '')} <{t}>" + (f" = {v!r}"[:80] if v is not None and not isinstance(v, (list, dict)) else ""))
+                  if depth < maxd:
+                      if isinstance(v, list):
+                          for c in v[:3]:
+                              structure(c, depth + 1, maxd, out)
+                          if len(v) > 3:
+                              out.append(f"{pad}  ... ({len(v)} items)")
+                      elif isinstance(v, dict):
+                          structure(v, depth + 1, maxd, out)
+                      for k2, c in n.items():
+                          if k2 in ("Data", "Exports") and isinstance(c, list):
+                              for cc in c[:4]:
+                                  structure(cc, depth + 1, maxd, out)
+              return out
+
+
+          def run_tool(ver, path, raw):
+              r = subprocess.run(["dotnet", DLL, ver, path, raw], capture_output=True, text=True, timeout=300)
+              return r.returncode, (r.stderr or r.stdout).strip()[-400:]
+
+
+          def main():
+              os.makedirs(DEBUG, exist_ok=True)
+              files = [l.split("|", 1) for l in open(os.path.join(WORK, "files.txt")).read().splitlines() if l.strip()]
+              good, index, errors, dumped = None, [], [], 0
+              raw = os.path.join(WORK, "raw.json")
+              for n, (path, rel) in enumerate(files, 1):
+                  name = os.path.splitext(os.path.basename(rel))[0]
+                  order = ([good] if good else []) + [v for v in VERSIONS if v != good]
+                  res, last_err, tried_ok, doc = None, "", None, None
+                  for ver in order:
+                      try:
+                          if os.path.exists(raw):
+                              os.remove(raw)
+                          code, msg = run_tool(ver, path, raw)
+                          if code != 0:
+                              last_err = f"{ver}: {msg}"
+                              continue
+                          tried_ok = ver
+                          doc = json.load(open(raw, encoding="utf-8"))
+                          tracks, info, meta = extract(doc)
+                          if tracks:
+                              res = (ver, tracks, info, meta)
+                              break
+                          last_err = f"{ver}: parsed, but no raw bone tracks found"
+                          if dumped < 3:
+                              with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
+                                  f.write("\n".join(structure(doc)))
+                              dumped += 1
+                      except Exception as e:
+                          last_err = f"{ver}: {type(e).__name__}: {e}"
+                          if dumped < 3 and tried_ok:
+                              traceback.print_exc()
+                              with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
+                                  f.write(last_err + "\n\n" + ("\n".join(structure(doc)) if doc else ""))
+                              dumped += 1
+                  if not res:
+                      errors.append(f"{rel}: {last_err}")
+                      print(f"[{n}/{len(files)}] FAILED {rel}: {last_err}")
+                      continue
+                  ver, tracks, info, meta = res
+                  good = ver
+                  nkeys = info.get("NumberOfKeys") or max(max(len(p), len(r)) for p, r, s in tracks.values())
+                  nkeys = max(int(nkeys), 1)
+                  bones = {}
+                  for b, (p, r, s) in tracks.items():
+                      if BONES == "core" and b not in CORE:
+                          continue
+                      def fill(a, d):
+                          a = a or [d]
+                          if len(a) < nkeys:
+                              a = a + [a[-1]] * (nkeys - len(a))
+                          return a[:nkeys]
+                      entry = {"p": [[round(v, 4) for v in k] for k in fill(p, [0, 0, 0])],
+                               "r": [[round(v, 6) for v in k] for k in fill(r, [0, 0, 0, 1])]}
+                      if s and any(abs(v - 1) > 1e-4 for k in s for v in k):
+                          entry["s"] = [[round(v, 5) for v in k] for k in fill(s, [1, 1, 1])]
+                      bones[b] = entry
+                  fps = info.get("fps", 30.0)
+                  doc_out = {"name": name, "path": rel, "fps": fps, "keys": nkeys, "length_s": round((nkeys - 1) / fps, 4) if nkeys > 1 else 0.0,
+                             "meta": meta, "bone_count_in_asset": len(tracks), "bones": bones}
+                  dest = os.path.join(OUT, os.path.dirname(rel), name + ".anim.json")
+                  os.makedirs(os.path.dirname(dest), exist_ok=True)
+                  with open(dest, "w") as f:
+                      json.dump(doc_out, f, separators=(",", ":"))
+                  index.append({"name": name, "file": os.path.relpath(dest, OUT).replace(os.sep, "/"), "fps": fps, "keys": nkeys,
+                                "length_s": doc_out["length_s"], "bones_saved": len(bones), "bones_in_asset": len(tracks), **{k: v for k, v in meta.items()}})
+                  print(f"[{n}/{len(files)}] ok  {rel}  ({ver}, {nkeys} keys, {len(bones)}/{len(tracks)} bones)")
+              json.dump({"units": "centimetres, Unreal axes (X forward, Y right, Z up, left-handed), quaternions x,y,z,w, bone transforms are LOCAL (relative to the parent bone)",
+                         "bone_parents_assumed_ue5_mannequin": PARENT, "animations": index, "errors": errors},
+                        open(os.path.join(OUT, "index.json"), "w"), indent=1)
+              s = f"Converted {len(index)} of {len(files)} animations; {len(errors)} failed."
+              print(s)
+              with open(os.environ.get("GITHUB_STEP_SUMMARY", os.devnull), "a") as f:
+                  f.write("### Animation conversion\n" + s + "\n\n" + ("\n".join("- " + e for e in errors[:40]) if errors else "") + "\n")
+              if not index:
+                  sys.exit(1)
+
+
+          main()
+          PYEOF
+          mkdir -p out
+          python3 "$RUNNER_TEMP/convert.py" "$RUNNER_TEMP/animdump/bin/AnimDump.dll" "${{ inputs.engine_versions || 'VER_UE5_7,VER_UE5_6,VER_UE5_5,VER_UE5_4,VER_UE5_3,VER_UE5_2,VER_UE5_1,VER_UE5_0' }}" "${{ inputs.bones || 'core' }}"
+
+      - name: Write a README into the result
+        if: ${{ always() }}
+        run: |
+          mkdir -p out
+          cat > out/README.txt <<'TXTEOF'
+          One <name>.anim.json per animation, same folder layout as the source.
+            fps, keys, length_s   timing (keys = number of key frames; a looping clip repeats its first key at the end)
+            meta                  additive type, root-motion flags and similar, when the asset has them
+            bones.<bone>.p        position per key  [x,y,z]      local to the parent bone, centimetres
+            bones.<bone>.r        rotation per key  [x,y,z,w]    local to the parent bone (quaternion)
+            bones.<bone>.s        scale per key, only written when it is not 1
+          Unreal axes: X forward, Y right, Z up (left-handed). index.json lists everything and the assumed bone parents.
+          debug/ appears only when a file could not be read: send those files back so the reader can be fixed.
+          TXTEOF
+
+      - name: Upload the result
+        if: ${{ always() && hashFiles('out/**') != '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: converted-animations
+          path: out/
+          retention-days: 30
+
+      - name: Commit the result to converted/
+        if: ${{ inputs.commit_results == true }}
+        run: |
+          rm -rf converted
+          mkdir -p converted
+          cp -r out/. converted/
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add converted
+          git commit -m "Add converted animations" || echo "nothing to commit"
+          git push
