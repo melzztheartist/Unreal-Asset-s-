@@ -400,8 +400,11 @@ jobs:
               if not tracks and f.get("RawAnimationData") and f.get("AnimationTrackNames"):   # UE 4 / early UE 5
                   for n, t in zip(val(f["AnimationTrackNames"][0]), val(f["RawAnimationData"][0])):
                       tracks[as_name(n)] = track_of(t)
+              if not tracks:                                                                   # UE 5.4+ sequencer / control-rig animations
+                  tracks, seq_info = extract_sequencer(doc)
+                  info.update(seq_info)
               for key in ("NumberOfFrames", "NumberOfKeys"):
-                  if key in f:
+                  if key in f and key not in info:
                       try:
                           info[key] = int(val(f[key][0]))
                       except (TypeError, ValueError):
@@ -418,6 +421,114 @@ jobs:
                       if not isinstance(v, (dict, list)):
                           meta[m] = v
               return tracks, info, meta
+
+
+          def _chan(c):
+              """one MovieSceneFloatChannel struct property -> (times, values, default, interp, tangents) or None"""
+              try:
+                  v = c["Value"][0]["Value"]
+              except (KeyError, IndexError, TypeError):
+                  return None
+              times = [t["Value"] for t in v.get("Times", [])]
+              vals, interp, tans = [], [], []
+              for x in v.get("Values", []):
+                  vals.append(float(x["Value"]))
+                  interp.append(x.get("InterpMode", "RCIM_Linear"))
+                  t = x.get("Tangent", {})
+                  tans.append((float(t.get("ArriveTangent", 0) or 0), float(t.get("LeaveTangent", 0) or 0)))
+              dv = float(v.get("DefaultValue", 0) or 0)
+              tr = v.get("TickResolution", {})
+              return times, vals, dv, interp, tans, tr
+
+
+          def _sample(ch, frame_ticks):
+              """evaluate a float channel at the given tick times (linear / constant / cubic hermite, constant extrapolation)"""
+              times, vals, dv, interp, tans, _ = ch
+              if not vals:
+                  return [dv] * len(frame_ticks)
+              out, j = [], 0
+              for t in frame_ticks:
+                  if t <= times[0]:
+                      out.append(vals[0]); continue
+                  if t >= times[-1]:
+                      out.append(vals[-1]); continue
+                  while j + 1 < len(times) and times[j + 1] <= t:
+                      j += 1
+                  while j > 0 and times[j] > t:
+                      j -= 1
+                  t0, t1, v0, v1 = times[j], times[j + 1], vals[j], vals[j + 1]
+                  mode, u = interp[j], (t - t0) / float(t1 - t0)
+                  if mode == "RCIM_Constant":
+                      out.append(v0)
+                  elif mode == "RCIM_Cubic":
+                      dt = float(t1 - t0)
+                      m0, m1 = tans[j][1] * dt, tans[j + 1][0] * dt
+                      u2, u3 = u * u, u * u * u
+                      out.append((2 * u3 - 3 * u2 + 1) * v0 + (u3 - 2 * u2 + u) * m0 + (-2 * u3 + 3 * u2) * v1 + (u3 - u2) * m1)
+                  else:
+                      out.append(v0 + (v1 - v0) * u)
+              return out
+
+
+          def _rot_quat(roll, pitch, yaw):
+              """Unreal FRotator (degrees) -> quaternion [x, y, z, w]"""
+              import math
+              sp, cp = math.sin(math.radians(pitch) / 2), math.cos(math.radians(pitch) / 2)
+              sy, cy = math.sin(math.radians(yaw) / 2), math.cos(math.radians(yaw) / 2)
+              sr, cr = math.sin(math.radians(roll) / 2), math.cos(math.radians(roll) / 2)
+              return [cr * sp * sy - sr * cp * cy, -cr * sp * cy - sr * cp * sy, cr * cp * sy - sr * sp * cy, cr * cp * cy + sr * sp * sy]
+
+
+          def extract_sequencer(doc):
+              """UE 5.4+ animations authored as an FK control rig (AnimationSequencerDataModel): every bone is a '<bone>_CONTROL' with
+              9 float channels (location xyz, rotation roll/pitch/yaw in degrees, scale xyz) in a MovieSceneControlRigParameterSection.
+              -> (tracks={bone:(pos,rot,scl)}, info)  with one key per frame."""
+              tracks, info = {}, {}
+              entries = []
+              for e in doc.get("Exports", []):
+                  for p in e.get("Data", []) if isinstance(e.get("Data"), list) else []:
+                      if isinstance(p, dict) and p.get("Name") == "TransformParameterNamesAndCurves" and isinstance(p.get("Value"), list):
+                          entries.extend(p["Value"])
+              if not entries:
+                  return tracks, info
+              tick, fps = 30.0, 30.0
+              for e in doc.get("Exports", []):                      # MovieScene export: TickResolution / DisplayRate
+                  for p in e.get("Data", []) if isinstance(e.get("Data"), list) else []:
+                      if isinstance(p, dict) and p.get("Name") in ("TickResolution", "DisplayRate") and isinstance(p.get("Value"), list):
+                          k = kids(p)
+                          if "Numerator" in k and "Denominator" in k:
+                              r = float(val(k["Numerator"])) / max(float(val(k["Denominator"])), 1.0)
+                              if p["Name"] == "TickResolution":
+                                  tick = r
+                              else:
+                                  fps = r
+              parsed = []
+              last = 0
+              for ent in entries:
+                  name, chans = None, []
+                  for c in ent.get("Value", []):
+                      if c.get("Name") == "ParameterName":
+                          name = as_name(c)
+                      else:
+                          chans.append(_chan(c))
+                  if name is None or len(chans) < 9 or any(c is None for c in chans[:9]):
+                      continue
+                  parsed.append((name, chans[:9]))
+                  for c in chans[:9]:
+                      if c[0]:
+                          last = max(last, max(c[0]))
+              nframes = int(round(last * fps / tick)) + 1
+              ticks = [i * tick / fps for i in range(nframes)]
+              for name, ch in parsed:
+                  bone = name[:-8] if name.endswith("_CONTROL") else name
+                  s = [_sample(c, ticks) for c in ch]
+                  pos = [[s[0][i], s[1][i], s[2][i]] for i in range(nframes)]
+                  rot = [_rot_quat(s[3][i], s[4][i], s[5][i]) for i in range(nframes)]
+                  scl = [[s[6][i], s[7][i], s[8][i]] for i in range(nframes)]
+                  tracks[bone] = (pos, rot, scl)
+              info["NumberOfKeys"] = nframes
+              info["fps"] = fps
+              return tracks, info
 
 
           def structure(n, depth=0, maxd=7, out=None):
@@ -460,6 +571,17 @@ jobs:
               return "\n".join(lines)
 
 
+          def export_classes(doc):
+              imports, out = doc.get("Imports", []), set()
+              for e in doc.get("Exports", []):
+                  ci = e.get("ClassIndex")
+                  if isinstance(ci, dict):
+                      ci = ci.get("Index", ci)
+                  if isinstance(ci, int) and ci < 0 and -ci - 1 < len(imports):
+                      out.add(str(imports[-ci - 1].get("ObjectName", "")))
+              return out
+
+
           def save_debug(name, doc, raw):
               import gzip, shutil
               with open(os.path.join(DEBUG, f"exports_{name}.txt"), "w") as f:
@@ -482,12 +604,12 @@ jobs:
               if LIMIT > 0:
                   files = files[:LIMIT]
                   print(f"test mode: only the first {LIMIT} files")
-              good, index, errors, dumped = None, [], [], 0
+              good, index, errors, dumped, skipped = None, [], [], 0, []
               raw = os.path.join(WORK, "raw.json")
               for n, (path, rel) in enumerate(files, 1):
                   name = os.path.splitext(os.path.basename(rel))[0]
                   order = ([good] if good else []) + [v for v in VERSIONS if v != good]
-                  res, last_err, tried_ok, doc = None, "", None, None
+                  res, last_err, tried_ok, doc, skip, dumped_here = None, "", None, None, None, False
                   print(f"[{n}/{len(files)}] reading {rel} ({(os.path.getsize(path) // 1024) if os.path.exists(path) else 0} KB)")
                   for ver in order:
                       try:
@@ -505,13 +627,19 @@ jobs:
                           if tracks:
                               res = (ver, tracks, info, meta)
                               break
+                          NOT_PLAIN = {"AnimMontage", "AnimComposite", "BlendSpace", "BlendSpace1D", "AimOffsetBlendSpace"}
+                          found_cls = export_classes(doc) & NOT_PLAIN
+                          if found_cls:
+                              skip = "not a plain animation (" + ", ".join(sorted(found_cls)) + "), it has no bone tracks of its own"
+                              break
                           last_err = f"{ver}: parsed, but no raw bone tracks found"
-                          if dumped < 3:
+                          if dumped < 3 and not dumped_here:
                               with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
                                   f.write("\n".join(structure(doc)))
                               if dumped < 2:
                                   save_debug(name, doc, raw)
                               dumped += 1
+                              dumped_here = True
                       except Exception as e:
                           last_err = f"{ver}: {type(e).__name__}: {e}"
                           if dumped < 3 and tried_ok:
@@ -519,6 +647,10 @@ jobs:
                               with open(os.path.join(DEBUG, f"structure_{name}.txt"), "w") as f:
                                   f.write(last_err + "\n\n" + ("\n".join(structure(doc)) if doc else ""))
                               dumped += 1
+                  if skip:
+                      skipped.append({"file": rel, "reason": skip})
+                      print(f"[{n}/{len(files)}] skipped {rel}: {skip}")
+                      continue
                   if not res:
                       errors.append(f"{rel}: {last_err}")
                       print(f"[{n}/{len(files)}] FAILED {rel}: {last_err}")
@@ -552,13 +684,13 @@ jobs:
                                 "length_s": doc_out["length_s"], "bones_saved": len(bones), "bones_in_asset": len(tracks), **{k: v for k, v in meta.items()}})
                   print(f"[{n}/{len(files)}] ok  {rel}  ({ver}, {nkeys} keys, {len(bones)}/{len(tracks)} bones)")
               json.dump({"units": "centimetres, Unreal axes (X forward, Y right, Z up, left-handed), quaternions x,y,z,w, bone transforms are LOCAL (relative to the parent bone)",
-                         "bone_parents_assumed_ue5_mannequin": PARENT, "animations": index, "errors": errors},
+                         "bone_parents_assumed_ue5_mannequin": PARENT, "animations": index, "skipped": skipped, "errors": errors},
                         open(os.path.join(OUT, "index.json"), "w"), indent=1)
-              s = f"Converted {len(index)} of {len(files)} animations; {len(errors)} failed."
+              s = f"Converted {len(index)} of {len(files)} animations; {len(skipped)} skipped (montages etc.); {len(errors)} failed."
               print(s)
               with open(os.environ.get("GITHUB_STEP_SUMMARY", os.devnull), "a") as f:
                   f.write("### Animation conversion\n" + s + "\n\n" + ("\n".join("- " + e for e in errors[:40]) if errors else "") + "\n")
-              if not index:
+              if not index and not skipped:
                   sys.exit(1)
 
 
