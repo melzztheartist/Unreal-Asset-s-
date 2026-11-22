@@ -1,4 +1,14 @@
 name: Convert Unreal animations to readable JSON
+
+# What this does
+#   1. finds every .uasset in the repo (and inside any .zip in the repo, e.g. Assets.zip),
+#   2. fetches the real files from Git LFS if they are only 131-byte pointer stubs (fill in lfs_repo with the repository they came from),
+#   3. reads them with UAssetAPI and writes one readable <name>.anim.json per animation (bone tracks, fps, length, root-motion flags),
+#   4. uploads everything as the artifact "converted-animations" (Actions -> this run -> Artifacts at the bottom)
+#      and, if you tick "commit_results", also commits it to a converted/ folder.
+# Run it: Actions tab -> "Convert Unreal animations to readable JSON" -> Run workflow.
+# Save this file as .github/workflows/convert-animations.yml in the repository that holds the real Assets.
+
 on:
   workflow_dispatch:
     inputs:
@@ -11,6 +21,10 @@ on:
         description: "Unreal versions to try, newest first (the first one that reads the file is used)"
         type: string
         default: "VER_UE5_7,VER_UE5_6,VER_UE5_5,VER_UE5_4,VER_UE5_3,VER_UE5_2,VER_UE5_1,VER_UE5_0"
+      lfs_repo:
+        description: "Optional: the GitHub repository (owner/name) the Assets.zip was downloaded from, so its real files can be fetched from Git LFS"
+        type: string
+        default: ""
       commit_results:
         description: "Also commit the converted files to a converted/ folder in the repository"
         type: boolean
@@ -89,6 +103,7 @@ jobs:
       - name: Find the .uasset files (unzip Assets.zip, resolve LFS pointers)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LFS_REPOS: ${{ inputs.lfs_repo }}
         run: |
           cat > "$RUNNER_TEMP/collect.py" <<'PYEOF'
           #!/usr/bin/env python3
@@ -150,47 +165,66 @@ jobs:
               return found
 
 
-          def lfs_download(pointers):
-              """pointers: {rel: (abs, (oid,size))}. Tries the repository's own LFS store (shared with its forks)."""
-              token = os.environ.get("GITHUB_TOKEN", "")
-              repo = os.environ.get("GITHUB_REPOSITORY", "")
-              server = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
-              if not repo:
-                  return {}
+          def norm_repo(r):
+              r = r.strip().rstrip("/")
+              r = re.sub(r"^https?://[^/]+/", "", r)
+              return r[:-4] if r.endswith(".git") else r
+
+
+          def fetch_from(repo, items, token, server):
+              """Download LFS objects for items {rel: (abs, (oid,size))} from one repository's LFS store."""
+              import hashlib
               url = f"{server}/{repo}.git/info/lfs/objects/batch"
-              auth = "Basic " + base64.b64encode(f"x-access-token:{token}".encode()).decode()
-              got = {}
-              items = list(pointers.items())
-              for i in range(0, len(items), 50):
-                  chunk = items[i:i + 50]
-                  body = {"operation": "download", "transfers": ["basic"],
-                          "objects": [{"oid": p[1][0], "size": p[1][1]} for _, p in chunk]}
-                  req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST", headers={
-                      "Accept": "application/vnd.git-lfs+json", "Content-Type": "application/vnd.git-lfs+json", "Authorization": auth})
+              hdr = {"Accept": "application/vnd.git-lfs+json", "Content-Type": "application/vnd.git-lfs+json"}
+              if token:
+                  hdr["Authorization"] = "Basic " + base64.b64encode(f"x-access-token:{token}".encode()).decode()
+              got, lst = {}, list(items.items())
+              for i in range(0, len(lst), 50):
+                  chunk = lst[i:i + 50]
+                  body = {"operation": "download", "transfers": ["basic"], "objects": [{"oid": p[1][0], "size": p[1][1]} for _, p in chunk]}
                   try:
+                      req = urllib.request.Request(url, data=json.dumps(body).encode(), method="POST", headers=hdr)
                       resp = json.load(urllib.request.urlopen(req, timeout=60))
                   except Exception as e:
-                      print("LFS batch request failed:", e)
+                      print(f"  {repo}: LFS request failed ({e})")
                       return got
                   by_oid = {o["oid"]: o for o in resp.get("objects", [])}
                   for rel, (ap, (oid, size)) in chunk:
-                      o = by_oid.get(oid, {})
-                      act = o.get("actions", {}).get("download")
+                      act = by_oid.get(oid, {}).get("actions", {}).get("download")
                       if not act:
                           continue
                       try:
-                          r = urllib.request.Request(act["href"], headers=act.get("header", {}))
-                          data = urllib.request.urlopen(r, timeout=120).read()
+                          data = urllib.request.urlopen(urllib.request.Request(act["href"], headers=act.get("header", {})), timeout=180).read()
                       except Exception as e:
                           print("  download failed for", rel, e)
                           continue
-                      if len(data) != size:
+                      if len(data) != size or hashlib.sha256(data).hexdigest() != oid:
+                          print("  checksum mismatch for", rel)
                           continue
                       dest = os.path.join(WORK, "lfs", rel)
                       os.makedirs(os.path.dirname(dest), exist_ok=True)
                       with open(dest, "wb") as f:
                           f.write(data)
                       got[rel] = dest
+              print(f"  {repo}: got {len(got)} of {len(items)}")
+              return got
+
+
+          def lfs_download(pointers):
+              """Tries the repositories listed in LFS_REPOS first (the repo the assets originally came from), then this repository
+              (its LFS store is shared with its forks). Public repositories can be read without a login."""
+              token = os.environ.get("GITHUB_TOKEN", "")
+              server = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
+              own = os.environ.get("GITHUB_REPOSITORY", "")
+              repos = [norm_repo(r) for r in os.environ.get("LFS_REPOS", "").replace(";", ",").split(",") if r.strip()]
+              if own:
+                  repos.append(own)
+              got, left = {}, dict(pointers)
+              for repo in repos:
+                  if not left:
+                      break
+                  got.update(fetch_from(repo, left, token if repo == own else "", server))
+                  left = {k: v for k, v in left.items() if k not in got}
               return got
 
 
@@ -202,7 +236,7 @@ jobs:
               ptrs = {rel: (ap, p) for rel, (ap, p) in found.items() if p}
               resolved = {}
               if ptrs:
-                  print(len(ptrs), "of them are Git LFS pointers (131-byte stubs); trying to fetch the real files from this repository's LFS store")
+                  print(len(ptrs), "of them are Git LFS pointers (131-byte stubs); trying to fetch the real files from Git LFS")
                   resolved = lfs_download(ptrs)
                   print("fetched", len(resolved), "of", len(ptrs))
               lines = []
@@ -218,7 +252,7 @@ jobs:
               print("usable files:", len(lines), " unusable pointers:", missing)
               if not lines:
                   print("::error::No real .uasset files found. The files in this repository / zip are Git LFS pointers and the LFS objects could not be fetched. "
-                        "Commit the real .uasset files (git lfs track '*.uasset' and push them from the machine that has the real files), then run again.")
+                        "Run the workflow again with the 'lfs_repo' box set to the GitHub repository the Assets.zip came from (owner/name), or fork that repository, or commit the real .uasset files.")
                   sys.exit(1)
               if missing:
                   print(f"::warning::{missing} .uasset files were only LFS pointers and were skipped.")
